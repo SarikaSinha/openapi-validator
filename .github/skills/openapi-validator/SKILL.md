@@ -80,6 +80,7 @@ Use these guardrails:
 Handle ruleset selection with these rules:
 
 - If no custom ruleset file is named by the user, pass `--ruleset default`. The validator's bundled IBM default ruleset then applies and no separate `@ibm-cloud/openapi-ruleset` install is required. This also disables auto-discovery.
+-  If the user wants the IBM default ruleset even though a local `.spectral.*` file exists in the project tree, pass `--ruleset default` to override discovery.
 - If you must explain auto-discovery (validator behavior when `--ruleset` is omitted): order is `.spectral.yaml`, then `.spectral.yml`, `.spectral.json`, `.spectral.js`, each searched with `find-up` from **process CWD** (not the OpenAPI file's directory) through parent directories before moving to the next name. A `.spectral.yaml` in a distant ancestor therefore wins over a `.spectral.js` in the current directory. Do not use this path unless the user asked for discovery and the tree is trusted.
 - If the user names a custom ruleset file explicitly, use that exact local path in a command such as `lint-openapi --ruleset spectral.yaml api.yaml` so the chosen file is unambiguous — only after the Security check below.
 - If the user is running **ibm-openapi-validator with a custom ruleset file** and that file extends `@ibm-cloud/openapi-ruleset`, treat `npm install @ibm-cloud/openapi-ruleset` as required setup for that project. This matches the validator customization docs and observed runtime behavior.
